@@ -1,0 +1,3 @@
+[submodule "PrivKit"]
+	path = Impersonnate_Rust
+	url = https://github.com/zblurx/impersonate-rs
