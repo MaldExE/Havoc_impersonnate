@@ -1,12 +1,27 @@
 from havoc import Demon, RegisterCommand
 import os
+import sys
 import argparse
+from datetime import datetime
 
 PATHTOFILE = "C:\\ProgramData\\"
 EXECUTABLEFILE = None
 
+
+def exit(_status=0, _message=None):
+    pass
+
+
+def print_message(message, _file=None):
+    sys.stderr.write(message)
+    raise ValueError(message)
+
+
 def parse_args(params):
-    parser = argparse.ArgumentParser(description='This tool implemant impersonnate in Havoc frameworks', exit_on_error=False)
+    parser = argparse.ArgumentParser(description='This tool implemant impersonnate in Havoc frameworks')
+    parser.exit = exit
+    parser._print_message = print_message
+
     subparsers = parser.add_subparsers(dest='command', required=True)
     
     parser_exec = subparsers.add_parser('SetExecutableFile', help='Set path to executable')
@@ -57,14 +72,18 @@ def impersonnate( demonID, *param ):
     
     demon  = Demon( demonID )
     TaskID: str = demon.ConsoleWrite(demon.CONSOLE_TASK, "Success")
-    
-    try:
-        args = parse_args(param)
-    except Exception as e:
-        demon.ConsoleWrite(demon.CONSOLE_ERROR, str(e))
-    
     dest_Ditto = f"{PATHTOFILE}{demonID}.exe"
 
+    try:
+        args = parse_args(param)
+    except ValueError as e:
+        error_message = str(e)
+        
+        if error_message == '':
+             error_message = 'Unknown arguments parsing error'
+        
+        return demon.ConsoleWrite(demon.CONSOLE_TASK, error_message)
+    
     if args.command == 'SetExecutableFile':
         EXECUTABLEFILE = args.executable_path
         demon.Command(TaskID, f'upload {EXECUTABLEFILE} {dest_Ditto}')
