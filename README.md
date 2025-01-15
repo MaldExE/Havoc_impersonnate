@@ -33,6 +33,3 @@ One line appears in script manager tab.
 The Script was load in havoc
 
 # Using guide
-
-test
-
