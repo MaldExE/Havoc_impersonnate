@@ -84,7 +84,8 @@ the option -h or --help was interpreted by havoc and craching my module
 ```
 Ditto-upload Exec help
 ```
-![alt text](image.png)
+
+![alt text](img/image6.png)
 
 #### In Memory
 ##### Step 1
@@ -180,13 +181,13 @@ Ditto-upload SetExecutableFile ~/Documents/malware/havoc_module/Havoc_impersonna
 ```
 Ditto-upload DemonAsSystem C:\Users\arthur\Desktop\tmp\Hello.exe
 ```
-![alt text](image.png)
+![alt text](img/image5.png)
 
 **Pour exécuter une commande personnalisée pour Ditto :**
 ```
 Ditto-upload Exec help
 ```
-![alt text](image.png)
+![alt text](img/image6.png)
 
 #### En mémoire
 ##### Étape 1
