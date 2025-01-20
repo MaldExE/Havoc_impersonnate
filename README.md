@@ -1,5 +1,23 @@
 # Havoc_impersonate
+
+**language**
+1. [EN](#en)
+2. [FR](#fr)
+
 ## EN
+
+1. [Description](#description)
+2. [Installation](#installation)
+3. [Usage-guide](#usage-guide)
+    1. [Prerequisites](#prerequisites)
+    2. [type-upload](#upload)
+        - [set-Executable-local-file](#step-1)
+        - [use-module](#step-2)
+    3. [type-memory](#in-memory)
+        - [set-Executable-local-file](#step-1-1)
+        - [use-module](#step-2-1)
+
+
 ### Description
 
 The Havoc_impersonate module directly integrates impersonation functionality into Havoc.
@@ -36,18 +54,24 @@ You must have infected your target and have a privileged account before using th
 #### Upload
 ##### Step 1
 
-This command is used to set the local file to be uploaded to your target. The upload requires your session ID.
+This command is used to set the local file to be uploaded to your target. The uploaded file take your id session havoc to name it.
 
 ```
 Ditto-upload SetExecutableFile /home/arthur/Documents/malware/havoc_module/Havoc_impersonnate/Ditto.exe
 ```
 
-To obtain a system shell:
+##### Step 2
+
+**To obtain a system shell:**
+
 ```
 Ditto-upload DemonAsSystem C:\Users\arthur\Desktop\tmp\Hello.exe
 ```
 
-To execute a custom command for Ditto:
+**To execute a custom command for Ditto or other executble:**
+!!! Warning !!!
+the option -h or --help was interprete by havoc and craching my module
+
 ```
 Ditto-upload Exec help
 ```
@@ -59,18 +83,36 @@ Ditto-upload Exec help
 Ditto-Memory SetExecutableFile /home/arthur/Documents/malware/havoc_module/Havoc_impersonnate/Ditto.exe
 ```
 
-To obtain a system shell:
+##### Step 2
+
+**To obtain a system shell:**
+
 ```
 Ditto-Memory DemonAsSystem C:\Users\arthur\Desktop\tmp\Hello.exe
 ```
 
-To execute a custom command for Ditto:
+**To execute a custom command for Ditto:**
+!!! Warning !!!
+the option -h or --help was interprete by havoc and craching my module
+
 ```
 Ditto-Memory Exec help
 ```
 
 
 ## FR
+
+1. [Description](#description-1)
+2. [Installation](#installation-1)
+3. [guide-utilisation](#guide-dutilisation)
+    1. [préréquis](#prérequis)
+    2. [Mode-upload](#upload-1)
+        - [Définir-Executable-locale](#étape-1)
+        - [utilisation-du-module](#étape-2)
+    3. [Mode-en-mêmoire](#en-mémoire)
+        - [Définir-Executable-locale](#étape-1-1)
+        - [utilisation-du-module](#étape-2-1)
+
 ### Description
 
 Le module Havoc_impersonnate intègre directement la fonctionnalité d'usurpation d'identité dans Havoc.
@@ -107,18 +149,20 @@ Vous devez avoir infecté votre cible et disposer d'un compte privilégié avant
 #### Upload
 ##### Étape 1
 
-Cette commande est utilisée pour définir le fichier local à télécharger sur votre cible. L'upload nécessite l'ID de votre session.
+Cette commande est utilisée pour définir le fichier local à télécharger sur votre cible. Le fichier uploader prendra le nom de votre session Havoc.
 
 ```
 Ditto-upload SetExecutableFile /home/arthur/Documents/malware/havoc_module/Havoc_impersonnate/Ditto.exe
 ```
 
-Pour obtenir un shell système :
+##### Étape 2
+
+**Pour obtenir un shell système :**
 ```
 Ditto-upload DemonAsSystem C:\Users\arthur\Desktop\tmp\Hello.exe
 ```
 
-Pour exécuter une commande personnalisée pour Ditto :
+**Pour exécuter une commande personnalisée pour Ditto :**
 ```
 Ditto-upload Exec help
 ```
@@ -126,9 +170,13 @@ Ditto-upload Exec help
 #### En mémoire
 ##### Étape 1
 
+Cette commande est utilisée pour définir le fichier local à télécharger sur votre cible. L'upload nécessite l'ID de votre session.
+
 ```
 Ditto-Memory SetExecutableFile /home/arthur/Documents/malware/havoc_module/Havoc_impersonnate/Ditto.exe
 ```
+
+##### Étape 2
 
 Pour obtenir un shell système :
 ```
